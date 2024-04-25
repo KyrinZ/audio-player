@@ -2,6 +2,7 @@
   <div
     class="text-[#FAE9CF] p-8 py-10 rounded-[3.5rem] w-full max-w-[450px] relative overflow-hidden z-0 shadow-lg"
   >
+    <VolumeDisplay />
     <img
       class="absolute inset-0 w-full h-full object-cover z-[-2]"
       :src="thumbnail"
@@ -14,7 +15,7 @@
     ></div>
 
     <!-- Top Nav Header -->
-    <div class="flex justify-between items-center mb-4">
+    <div class="flex justify-between items-center mb-2">
       <button @click="playPrevAudio">
         <BackIcon class="w-8" />
       </button>
@@ -26,20 +27,16 @@
 
     <!-- Image Banner -->
     <div
-      class="relative overflow-hidden w-4/6 aspect-[123/121] mx-auto rounded-3xl shadow-lg shadow-gray-900 mb-8"
+      class="relative overflow-hidden w-4/6 aspect-[123/121] mx-auto rounded-3xl shadow-lg shadow-gray-900 mb-4"
     >
-      <img
-        class="w-full h-full object-cover"
-        :src="thumbnail"
-        alt=""
-      />
+      <img class="w-full h-full object-cover" :src="thumbnail" alt="" />
       <div
         class="absolute inset-0"
         style="box-shadow: inset 0 0 70px 50px #000000ad"
       ></div>
     </div>
     <h1 class="text-2xl text-center">{{ selectedAudio.title }}</h1>
-    <p class="text-center mb-12">{{ selectedAudio.dataset.author }}</p>
+    <p class="text-center mb-6">{{ selectedAudio.dataset.author }}</p>
 
     <div class="flex justify-between px-4">
       <p class="flex gap-1 items-center">
@@ -47,9 +44,12 @@
       </p>
       <p class="text-[#927A58]">{{ displayTotalDuration }}</p>
     </div>
-    <div>
+    <div
+      class="h-[300px] aspect-square mx-auto flex items-center justify-center"
+    >
       <Controls
         :progress="progress"
+        :image="thumbnail"
         @on-back="rewindFiveSeconds"
         @on-forward="fastForwardFiveSeconds"
         @on-volume-up="volumeUp"
@@ -65,6 +65,7 @@
 import BackIcon from "@/components/MusicPlayer/Icons/BackIcon.vue";
 import PlayIcon from "@/components/MusicPlayer/Icons/PlayIcon.vue";
 import Controls from "@/components/MusicPlayer/Controls.vue";
+import VolumeDisplay from "@/components/MusicPlayer/VolumeDisplay.vue";
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useAudioStore } from "./stores/audiostore";

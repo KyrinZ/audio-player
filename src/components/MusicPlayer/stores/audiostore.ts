@@ -10,6 +10,7 @@ export const useAudioStore = defineStore("AudioStore", () => {
   const thumbnail = ref("");
   const cIndex = ref(-1);
   const audioPaused = ref(true);
+  const volume = ref(1);
 
   function playAudio(item: any, index: number) {
     resetAudio();
@@ -83,18 +84,22 @@ export const useAudioStore = defineStore("AudioStore", () => {
   }
 
   function volumeUp() {
+    console.log(selectedAudio.value.volume);
+
     if (!selectedAudio.value) return;
     selectedAudio.value.volume = Math.min(
-      selectedAudio.value.volume + selectedAudio.value.volume * 0.5,
+      selectedAudio.value.volume +  0.05,
       1
     );
+    volume.value = selectedAudio.value.volume;
   }
   function volumeDown() {
     if (!selectedAudio.value) return;
     selectedAudio.value.volume = Math.max(
-      selectedAudio.value.volume - selectedAudio.value.volume * 0.5,
+      selectedAudio.value.volume -  0.05,
       0
     );
+    volume.value = selectedAudio.value.volume;
   }
 
   function rewindFiveSeconds() {
@@ -126,5 +131,6 @@ export const useAudioStore = defineStore("AudioStore", () => {
     thumbnail,
     cIndex,
     audioPaused,
+    volume,
   };
 });

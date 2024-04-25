@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-[#FAE9CF] p-8 py-10 rounded-[3.5rem] w-full max-w-[450px] relative overflow-hidden z-0 shadow-lg h-[59rem] flex flex-col"
+    class="text-[#FAE9CF] p-8 py-10 rounded-[3.5rem] w-full max-w-[450px] relative overflow-hidden z-0 shadow-lg flex flex-col"
   >
     <img
       class="absolute inset-0 w-full h-full object-cover z-[-2]"
@@ -26,7 +26,7 @@
     </div>
 
     <!-- Top Nav Header -->
-    <div class="flex justify-center items-center mb-8">
+    <div class="flex justify-center items-center mb-4">
       <p>Tracklist</p>
     </div>
 
@@ -38,19 +38,16 @@
     >
       <div
         class="flex gap-6 cursor-pointer"
-        :class="
-          cIndex === index && !audioPaused ? 'text-[#A48360]' : ''
-        "
+        :class="cIndex === index && !audioPaused ? 'text-[#A48360]' : ''"
         v-for="(item, index) in songList"
         :key="item.path"
         @click="onSelect(item, index)"
       >
-        <PauseIcon
-          v-if="cIndex === index && !audioPaused"
-          class="w-8"
-        />
-        <PlayIcon v-else class="w-8" />
-        <div>
+        <div class="w-8">
+          <PauseIcon v-if="cIndex === index && !audioPaused" class="w-8" />
+          <PlayIcon v-else class="w-8" />
+        </div>
+        <div class="">
           <p class="font-bold">{{ item.name }}</p>
           <p class="font-thin">{{ item.author }}</p>
         </div>
